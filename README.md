@@ -367,7 +367,7 @@ These environment variables will be **automatically** configured each time you c
 
 ## After install
 
-**Your load balancer will display an "HTTP 503: Service unavailable" error until the end of the first deployment.**
+**Your load balancer will display a "503 Service Temporarily Unavailable" error until the end of the first deployment.**
 
 This infrastructure exports four Terraform outputs: `application_load_balancer_uri`, `dashboard_url`, `pipeline_execution_details_url` and `ssl_validation_dns_records`.
 
