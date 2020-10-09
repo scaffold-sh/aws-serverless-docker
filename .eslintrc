@@ -29,7 +29,7 @@
     "@typescript-eslint/interface-name-prefix": ["error", "always"],
     "@typescript-eslint/member-ordering": ["error", {
       "default": {
-        "memberTypes": ["signature", "method", "field", "constructor"],
+        "memberTypes": ["signature", "field", "constructor", "method"],
         "order": "alphabetically"
       }
     }]
