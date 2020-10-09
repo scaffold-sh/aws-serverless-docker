@@ -3,6 +3,6 @@
   "provider": "aws",
   "type": "aws_serverless_docker",
   "version:": "1.0.0",
-  "source_url": "https://github.com/scaffold-sh/aws-serverless-docker",
-  "docs_url": "https://scaffold.sh/docs/infrastructures/aws/serverless-docker"
+  "sourceUrl": "https://github.com/scaffold-sh/aws-serverless-docker",
+  "docsUrl": "https://scaffold.sh/docs/infrastructures/aws/serverless-docker"
 }
