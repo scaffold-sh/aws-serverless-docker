@@ -1,0 +1,69 @@
+# Running on Ubuntu 18.04 (aws/codebuild/standard:4.0)
+# https://github.com/aws/aws-codebuild-docker-images/blob/master/ubuntu/standard/4.0/Dockerfile
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo No pre pre-deploy commands
+  build:
+    commands:
+      - echo Running pre-deploy command in production task...
+      - | 
+        PRE_DEPLOY_TASK_ARN=`aws ecs run-task \
+          --cluster $AWS_ECS_CLUSTER \
+          --task-definition $AWS_ECS_PRE_DEPLOY_TASK_DEF \
+          --network-configuration="awsvpcConfiguration={subnets=[$AWS_ECS_PRE_DEPLOY_TASK_SUBNETS],securityGroups=[$AWS_ECS_PRE_DEPLOY_TASK_SECURITY_GROUPS],assignPublicIp=$AWS_ECS_PRE_DEPLOY_TASK_ASSIGN_PUBLIC_IP}" \
+          --overrides '{ "containerOverrides": [ { "name": "'"$AWS_ECS_PRE_DEPLOY_TASK_CONTAINER_NAME"'", "environment": [ { "name": "AWS_COMMIT_ID", "value": "'"$CODEBUILD_RESOLVED_SOURCE_VERSION"'" } ] } ] }' \
+          --launch-type=FARGATE \
+          --platform-version="1.4.0" \
+          --query "tasks[0].taskArn" \
+          --output text`
+      - PRE_DEPLOY_TASK_ID=${PRE_DEPLOY_TASK_ARN##*/}
+      - echo Waiting for pre-deploy command to terminate...
+      - |
+        RETRY_ENABLED=1
+        RETRY_COUNT=0
+        PRODUCTION_CONTAINER_EXIT_CODE=0
+
+        while [ $RETRY_COUNT -lt $WAITER_MAX_RETRIES ] && [ $RETRY_ENABLED -eq 1 ]; do
+          RETRY_ENABLED=0
+          aws ecs wait tasks-stopped --cluster $AWS_ECS_CLUSTER --tasks $PRE_DEPLOY_TASK_ARN 2>/dev/null
+          WAITER_EXIT_CODE=$?
+  
+          if [ $WAITER_EXIT_CODE -eq 0 ]; then
+            aws logs get-log-events \
+              --log-group-name $AWS_ECS_PRE_DEPLOY_TASK_LOGS_GROUP_NAME \
+              --log-stream-name $AWS_ECS_PRE_DEPLOY_TASK_LOGS_STREAM_PREFIX/$PRE_DEPLOY_TASK_ID \
+              --query="events[].[message]" \
+              --output text | sed 's/.*/[Production Container] &/'
+            
+            PRODUCTION_CONTAINER_EXIT_CODE=`aws ecs describe-tasks \
+              --tasks $PRE_DEPLOY_TASK_ARN \
+              --cluster $AWS_ECS_CLUSTER \
+              --query "tasks[0].containers[0].exitCode"`
+            
+            if [ $PRODUCTION_CONTAINER_EXIT_CODE -eq 0 ]; then
+              echo "[Production Container] Exited successfully"
+            else
+              echo "[Production Container] Exited with non-zero status"
+            fi
+  
+          elif [ $WAITER_EXIT_CODE -eq 255 ]; then
+            ((RETRY_COUNT++))
+            if [ $RETRY_COUNT -eq $WAITER_MAX_RETRIES ]; then
+              echo "[Production Container] Timed out"
+              PRODUCTION_CONTAINER_EXIT_CODE=255
+            else
+              RETRY_ENABLED=1
+            fi
+          
+          else
+            echo "[Production Container] Waiter exited with non-zero status"
+            PRODUCTION_CONTAINER_EXIT_CODE=$WAITER_EXIT_CODE
+          fi
+        done
+      - exit $PRODUCTION_CONTAINER_EXIT_CODE
+  post_build:
+    commands:
+      - echo No post pre-deploy commands

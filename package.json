@@ -1,0 +1,60 @@
+{
+  "name": "aws-serverless-docker",
+  "description": "The AWS serverless docker infrastructure",
+  "version": "1.0.0",
+  "main": "./dist/main.js",
+  "types": "./src/main.ts",
+  "license": "MIT",
+  "private": true,
+  "author": {
+    "name": "Scaffold",
+    "email": "support@scaffold.sh",
+    "url": "https://scaffold.sh"
+  },
+  "homepage": "https://scaffold.sh/docs/infrastructures/aws/serverless-docker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaffold-sh/aws-serverless-docker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/scaffold-sh/aws-serverless-docker/issues"
+  },
+  "keywords": [
+    "scaffold",
+    "aws",
+    "docker",
+    "fargate",
+    "codebuild",
+    "codepipeline"
+  ],
+  "scripts": {
+    "get": "cdktf get",
+    "build": "yarn get && tsc",
+    "synth": "cdktf synth",
+    "compile": "tsc --pretty",
+    "watch": "tsc -w",
+    "test": "echo ok",
+    "upgrade": "npm i cdktf@latest cdktf-cli@latest",
+    "upgrade:next": "npm i cdktf@next cdktf-cli@next",
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "lint:fix": "eslint --fix . --ext .ts --config .eslintrc"
+  },
+  "engines": {
+    "node": ">=12.16.0"
+  },
+  "dependencies": {
+    "cdktf": "0.0.14",
+    "constructs": "3.0.4",
+    "dotenv-flow": "3.2.0",
+    "yaml": "1.10.0"
+  },
+  "devDependencies": {
+    "@types/dotenv-flow": "3.0.1",
+    "@types/node": "14.0.27",
+    "cdktf-cli": "0.0.14",
+    "eslint": "5.16.0",
+    "eslint-config-oclif": "3.1.0",
+    "eslint-config-oclif-typescript": "0.1.0",
+    "typescript": "3.9.7"
+  }
+}

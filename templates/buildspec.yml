@@ -1,0 +1,31 @@
+# Running on Ubuntu 18.04 (aws/codebuild/standard:4.0)
+# https://github.com/aws/aws-codebuild-docker-images/blob/master/ubuntu/standard/4.0/Dockerfile
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH}
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t $AWS_ECR_REPOSITORY_URI:latest -t $AWS_ECR_REPOSITORY_URI:$IMAGE_TAG .
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      # Required by production Fargate tasks
+      - docker push $AWS_ECR_REPOSITORY_URI:$IMAGE_TAG
+      # Required by pre-deploy Fargate tasks
+      - docker push $AWS_ECR_REPOSITORY_URI:latest
+      # Required by Fargate
+      - echo Writing image definitions file...
+      - printf '[{"name":"%s","imageUri":"%s"}]' "$CONTAINER_NAME" "$AWS_ECR_REPOSITORY_URI:$IMAGE_TAG" > imagedefinitions.json
+# Required by Fargate
+artifacts:
+    files: imagedefinitions.json
