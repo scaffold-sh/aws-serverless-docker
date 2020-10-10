@@ -362,7 +362,7 @@ export class PipelineConstruct extends Construct {
 
     startPipeline.addOverride(
       "provisioner.local-exec.command",
-      `aws codepipeline start-pipeline-execution --name ${Token.asString(pipeline.name)} --profile ${props.awsProfile} --region ${Token.asString(props.currentRegionAsString)}`
+      `aws codepipeline start-pipeline-execution --name ${pipeline.name} --profile ${props.awsProfile} --region ${props.currentRegionAsString}`
     )
   }
 }
