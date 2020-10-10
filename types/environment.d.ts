@@ -13,6 +13,7 @@ declare global {
      * @property GITHUB_REPO The GitHub repository that contains your source code.
      * @property GITHUB_REPO_OWNER The owner of your GitHub repository. Can be a regular user or an organization.
      * @property GITHUB_WEBHOOK_TOKEN A random token that will be used by CodePipeline and GitHub to prevent impersonation.
+     * @property NODE_ENV The current loaded environment.
      * @property NUMBER_OF_AVAILABILITY_ZONES_USED 	The number of availability zones used by your infrastructure.
      * @property PRE_DEPLOY_COMMAND A command that will run in a newly created production container, just before deployment.
      * @property SCAFFOLD_AWS_PROFILE The AWS named profile used to create your infrastructure.
