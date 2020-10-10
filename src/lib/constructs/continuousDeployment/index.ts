@@ -25,14 +25,14 @@ import PipelineConstruct from "./pipeline"
  * @property containerName A name chosen to designate your Docker container.
  * @property containersLogsGroup The log group used to store your container logs.
  * @property currentAccount The AWS account used to create your infrastructure.
- * @property currentRegion The region used to create your DocumentDB cluster as data object.
- * @property currentRegionAsString The region used to create your infrastructure as string.
+ * @property currentRegion The AWS region used to create your DocumentDB cluster as data object.
+ * @property currentRegionAsString The AWS region used to create your infrastructure as string.
  * @property ecrRepository The ECR repository used to store your Docker images.
  * @property fargateCluster The Fargate cluster used in your infrastructure.
  * @property fargateService The AWS Fargate service used in your infrastructure.
  * @property fargateTasksSecurityGroup The security group used by your Fargate tasks.
  * @property githubBranch The GitHub branch from which you want to deploy.
- * @property githubOauthToken The GitHub Oauth token used by your pipeline to access your repository.
+ * @property githubOauthToken The GitHub OAuth token used by your pipeline to access your repository.
  * @property githubRepo The GitHub repository used as source for your pipeline.
  * @property githubRepoOwner The GitHub repository owner (an user or an organization).
  * @property githubWebhookToken A random token that will be used by CodePipeline and GitHub to prevent impersonation

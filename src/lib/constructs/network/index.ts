@@ -25,7 +25,7 @@ import SslConstruct from "./ssl"
 /**
  * Represents the properties of the network construct.
  * @property currentAccount The AWS account used to create your infrastructure.
- * @property currentRegionAsString The region used to create your infrastructure as string.
+ * @property currentRegionAsString The AWS region used to create your infrastructure as string.
  * @property domainNames The domain names that need to be covered by the SSL certificate.
  * @property enableHttps Do you want to redirect HTTP to HTTPS?
  * @property numberOfAvailabilityZonesUsed The number of availability zones used by your infrastructure.

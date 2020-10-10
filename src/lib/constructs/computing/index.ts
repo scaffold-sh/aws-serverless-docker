@@ -36,7 +36,7 @@ import { EnvironmentVariables } from "../../../main"
  * @property containerListenPort The port that needs to be used to send requests to your Docker container.
  * @property containerName A name chosen to designate your Docker container.
  * @property currentAccount The AWS account used to create your infrastructure.
- * @property currentRegion The region used to create your infrastructure as data object.
+ * @property currentRegion The AWS region used to create your infrastructure as data object.
  * @property dockerImageName A name chosen to designate your Docker image in your ECR repository.
  * @property enableAutoScaling Do auto-scaling needs to be enabled?
  * @property environmentVariables The environment variables of your application as "key => value" format.

@@ -9,7 +9,7 @@ declare global {
      * @property FARGATE_TASKS_CPU The CPU that could be used by your Fargate tasks.
      * @property FARGATE_TASKS_MEMORY The memory that could be used by your Fargate tasks.
      * @property GITHUB_BRANCH The branch from which you want to deploy.
-     * @property GITHUB_OAUTH_TOKEN The GitHub Oauth token that will be used by CodePipeline to pull your source code from your repository.
+     * @property GITHUB_OAUTH_TOKEN The GitHub OAuth token that will be used by CodePipeline to pull your source code from your repository.
      * @property GITHUB_REPO The GitHub repository that contains your source code.
      * @property GITHUB_REPO_OWNER The owner of your GitHub repository. Can be a regular user or an organization.
      * @property GITHUB_WEBHOOK_TOKEN A random token that will be used by CodePipeline and GitHub to prevent impersonation.

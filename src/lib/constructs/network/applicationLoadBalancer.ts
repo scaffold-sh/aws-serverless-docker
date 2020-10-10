@@ -54,7 +54,7 @@ const lbLogsBucketPolicyAccountIdDependingOnRegion: any = {
  * Represents the properties of the application load balancer construct.
  * @property acmCertificate The ACM certificate created for your application.
  * @property currentAccount The AWS account used to create your infrastructure.
- * @property currentRegionAsString The region used to create your infrastructure as string.
+ * @property currentRegionAsString The AWS region used to create your infrastructure as string.
  * @property enableHttps Do you want to redirect HTTP to HTTPS?
  * @property publicSubnets The public subnets of your infrastructure.
  * @property resourceNamesPrefix An unique custom prefix used to avoid name colision with existing resources.

@@ -21,11 +21,11 @@ import * as Null from "../../../imports/providers/null"
  * @property codebuildBuildProject The CodeBuild build project.
  * @property codebuildPreDeployProject The CodeBuild pre-deploy project.
  * @property codebuildTestProject The CodeBuild test project.
- * @property currentRegionAsString The region used to create your infrastructure as string.
+ * @property currentRegionAsString The AWS region used to create your infrastructure as string.
  * @property fargateCluster The Fargate cluster used in your infrastructure.
  * @property fargateService The Fargate service used in your infrastructure.
  * @property githubBranch The GitHub branch from which you want to deploy.
- * @property githubOauthToken The GitHub Oauth token used by your pipeline to access your repository.
+ * @property githubOauthToken The GitHub OAuth token used by your pipeline to access your repository.
  * @property githubRepo The GitHub repository used as source for your pipeline.
  * @property githubRepoOwner The GitHub repository owner (an user or an organization).
  * @property githubWebhookToken A random token that will be used by CodePipeline and GitHub to prevent impersonation.

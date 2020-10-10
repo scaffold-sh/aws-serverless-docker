@@ -18,7 +18,7 @@ import {
  * @property autoScalingCpuLimitPercent The cpu usage required to trigger auto-scaling.
  * @property autoScalingMemoryLimitPercent The memory usage required to trigger auto-scaling.
  * @property containersLogsGroup The log group used to store your container logs.
- * @property currentRegion The region used to create your DocumentDB cluster as data object.
+ * @property currentRegion The AWS region used to create your DocumentDB cluster as data object.
  * @property enableAutoScaling Do auto-scaling needs to be enabled?
  * @property fargateCluster The Fargate cluster used in your infrastructure.
  * @property fargateService The Fargate service used in your infrastructure.

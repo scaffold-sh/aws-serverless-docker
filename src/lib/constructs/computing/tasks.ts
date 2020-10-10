@@ -27,7 +27,7 @@ import escapeTemplateForTerraform from "../../../utils/escapeTemplateForTerrafor
  * @property containerName A name chosen to designate your Docker container.
  * @property containersLogsGroup The log group used to store your container logs.
  * @property currentAccount The AWS account used to create your infrastructure.
- * @property currentRegion The region used to create your DocumentDB cluster as data object.
+ * @property currentRegion The AWS region used to create your DocumentDB cluster as data object.
  * @property ecrRepository The ECR repository used to store your Docker images.
  * @property environmentVariables The SSM parameters that contains your application environment variables.
  * @property preDeployCommand A command that will run in a newly created production container, just before deployment.
